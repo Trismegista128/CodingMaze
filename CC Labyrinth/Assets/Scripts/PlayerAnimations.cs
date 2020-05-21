@@ -2,24 +2,36 @@
 
 public class PlayerAnimations : MonoBehaviour
 {
-    public Animator MyAnimation;
-    public Animator MyShadow;
-    public SpriteRenderer MyRenderer;
-    public SpriteRenderer MyShadowRenderer;
+    [SerializeField]
+    private Animator myCharacterAnimator;
+    [SerializeField]
+    private Animator myShadowAnimator;
+    [SerializeField]
+    private ExplodeAnimator myExplosionAnimator;
+    [SerializeField]
+    private SpriteRenderer myCharacterRenderer;
+    [SerializeField]
+    private SpriteRenderer myShadowRenderer;
+
     public void UpdateAnimation(Vector2 movement)
     {
-        MyAnimation.SetFloat("Vertical", (int)movement.y);
-        MyAnimation.SetFloat("Horizontal", (int)movement.x);
-        MyAnimation.SetFloat("Speed", movement.magnitude);
-        MyShadow.SetFloat("Speed", movement.magnitude);
+        myCharacterAnimator.SetFloat("Vertical", (int)movement.y);
+        myCharacterAnimator.SetFloat("Horizontal", (int)movement.x);
+        myCharacterAnimator.SetFloat("Speed", movement.magnitude);
+        myShadowAnimator.SetFloat("Speed", movement.magnitude);
     }
 
     public void TriggerDeath()
     {
-        MyAnimation.SetBool("IsDead", true);
-        MyShadowRenderer.enabled = false;
-        MyRenderer.sortingOrder = 0;
+        myCharacterAnimator.SetBool("IsDead", true);
+        myShadowRenderer.enabled = false;
+        myCharacterRenderer.sortingOrder = 0;
     }
 
-    public Sprite GetMySprite => MyRenderer.sprite;
+    public void TriggerExplosion()
+    {
+        myExplosionAnimator.TriggerExplosion();
+    }
+
+    public Sprite GetMySprite => myCharacterRenderer.sprite;
 }

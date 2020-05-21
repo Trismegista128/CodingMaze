@@ -3,30 +3,30 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts
 {
-    public class PlayerAI : MonoBehaviour
+    public class PlayerAI: MonoBehaviour, IPlayerAI
     {
         public string MyName = "ABC";
 
         private int counter = -1;
-        private List<Direction> order = new List<Direction> {
-            Direction.Down,
-            Direction.Up,
-            Direction.Up,
-            Direction.Up,
-            Direction.Up,
-            Direction.Down,
-            Direction.Down,
-            Direction.Down,
-            Direction.Down,
-            Direction.Down,
-            Direction.Right,
-            Direction.Right,
-            Direction.Right,
-            Direction.Up,
-            Direction.Up,
+        private List<DirectionType> order = new List<DirectionType> {
+            DirectionType.Down,
+            DirectionType.Up,
+            DirectionType.Up,
+            DirectionType.Up,
+            DirectionType.Up,
+            DirectionType.Down,
+            DirectionType.Down,
+            DirectionType.Down,
+            DirectionType.Down,
+            DirectionType.Down,
+            DirectionType.Right,
+            DirectionType.Right,
+            DirectionType.Right,
+            DirectionType.Up,
+            DirectionType.Up,
         };
 
-        public Direction RequestMove(Direction[] possibleDirections)
+        public DirectionType RequestMove(DirectionType[] possibleDirections)
         {
             counter++;
             return order[counter];

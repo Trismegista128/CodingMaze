@@ -7,6 +7,7 @@
         Up,
         Down,
         Bug,
+        Looped,
         None
     }
 }

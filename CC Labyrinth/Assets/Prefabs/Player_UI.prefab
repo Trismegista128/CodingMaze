@@ -842,20 +842,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30bb0bb25bc32745b2a531e094d1045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YPosition: 12.625
-  MyPosition: {fileID: 670699373360291029}
-  MyName: {fileID: 670699372376911959}
-  MySteps: {fileID: 670699372783292318}
-  MyIcon: {fileID: 670699373874617239}
-  MyMedals:
+  yPosition: 12.625
+  myPosition: {fileID: 670699373360291029}
+  myName: {fileID: 670699372376911959}
+  mySteps: {fileID: 670699372783292318}
+  myIcon: {fileID: 670699373874617239}
+  myMedals:
   - {fileID: 670699372453464289}
   - {fileID: 670699372572704849}
   - {fileID: 670699373506582245}
-  MyErrorIcons:
+  myErrorIcons:
   - {fileID: 670699373541972929}
   - {fileID: 670699372229443308}
   - {fileID: 670699374218504733}
   - {fileID: 670699374216017186}
+  - {fileID: 670699372520737435}
   - {fileID: 670699372520737435}
 --- !u!1 &670699373506582243
 GameObject:

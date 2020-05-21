@@ -2,24 +2,18 @@
 
 public class ExplodeAnimator : MonoBehaviour
 {
-    public PlayerAnimations MyCharacterAnimations;
-    public Animator MyExplosionAnimator;
-
-    // Start is called before the first frame update
+    [SerializeField]
+    private PlayerAnimations characterAnimator;
+    [SerializeField]
+    private Animator myExplosionAnimator;
 
     public void TriggerExplosion()
     {
-
-        MyExplosionAnimator.SetTrigger("Explode");
+        myExplosionAnimator.SetTrigger("Explode");
     }
 
     public void OnReadyToChangeSprite()
     {
-        MyCharacterAnimations.TriggerDeath();
-    }
-
-    public void OnExplosionFinished()
-    {
-
+        characterAnimator.TriggerDeath();
     }
 }

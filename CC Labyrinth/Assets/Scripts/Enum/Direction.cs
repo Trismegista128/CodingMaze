@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts
 {
-    public enum Direction
+    public enum DirectionType
     {
         Left,
         Up,

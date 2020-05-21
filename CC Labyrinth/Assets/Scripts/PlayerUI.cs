@@ -5,34 +5,34 @@ using Assets.Scripts;
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField]
-    private float YPosition = 12.625f;
+    private float yPosition = 12.625f;
     [SerializeField]
-    private Transform MyPosition;
+    private Transform myPosition;
     [SerializeField]
-    private TextMeshPro MyName;
+    private TextMeshPro myName;
     [SerializeField]
-    private TextMeshPro MySteps;
+    private TextMeshPro mySteps;
     [SerializeField]
-    private SpriteRenderer MyIcon;
+    private SpriteRenderer myIcon;
 
     [SerializeField]
-    private SpriteRenderer[] MyMedals;
+    private SpriteRenderer[] myMedals;
     [SerializeField]
-    private SpriteRenderer[] MyErrorIcons;
+    private SpriteRenderer[] myErrorIcons;
 
     public void Initialize(string name, int steps, Sprite characterIcon, int playerNumber)
     {
-        MyName.text = name;
-        MySteps.text = CreateStepsString(steps);
-        MyIcon.sprite = characterIcon;
-        MyPosition.position = new Vector2(CalculatePostionXBaseOnNumber(playerNumber), YPosition);
+        myName.text = name;
+        mySteps.text = CreateStepsString(steps);
+        myIcon.sprite = characterIcon;
+        myPosition.position = new Vector2(CalculatePostionXBaseOnNumber(playerNumber), yPosition);
 
-        foreach(var medal in MyMedals)
+        foreach(var medal in myMedals)
         {
             medal.enabled = false;
         }
 
-        foreach(var error in MyErrorIcons)
+        foreach(var error in myErrorIcons)
         {
             error.enabled = false;
         }
@@ -40,40 +40,43 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateSteps(int value)
     {
-        MySteps.text = CreateStepsString(value);
+        mySteps.text = CreateStepsString(value);
     }
 
     public void UpdateIcon(Sprite sprite)
     {
-        MyIcon.sprite = sprite;
+        myIcon.sprite = sprite;
     }
 
     public void OnFinalResults(int myPlace)
     {
-        MyPosition.position = new Vector2(CalculatePostionXBaseOnNumber(myPlace), YPosition);
+        myPosition.position = new Vector2(CalculatePostionXBaseOnNumber(myPlace), yPosition);
 
-        if (myPlace == 1) MyMedals[0].enabled = true;
-        if (myPlace == 2) MyMedals[1].enabled = true;
-        if (myPlace == 3) MyMedals[2].enabled = true;
+        if (myPlace == 1) myMedals[0].enabled = true;
+        if (myPlace == 2) myMedals[1].enabled = true;
+        if (myPlace == 3) myMedals[2].enabled = true;
     }
     public void OnError(ErrorType error)
     {
         switch (error)
         {
             case ErrorType.Up:
-                MyErrorIcons[0].enabled = true;
+                myErrorIcons[0].enabled = true;
                 break;
             case ErrorType.Down:
-                MyErrorIcons[1].enabled = true;
+                myErrorIcons[1].enabled = true;
                 break;
             case ErrorType.Left:
-                MyErrorIcons[2].enabled = true;
+                myErrorIcons[2].enabled = true;
                 break;
             case ErrorType.Right:
-                MyErrorIcons[3].enabled = true;
+                myErrorIcons[3].enabled = true;
                 break;
             case ErrorType.Bug:
-                MyErrorIcons[4].enabled = true;
+                myErrorIcons[4].enabled = true;
+                break;
+            case ErrorType.Looped:
+                myErrorIcons[5].enabled = true;
                 break;
         }
     }

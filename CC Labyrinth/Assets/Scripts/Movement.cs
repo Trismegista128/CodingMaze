@@ -4,51 +4,48 @@ using System.Collections.Generic;
 
 public class Movement : MonoBehaviour
 {
-    public float DelayStartBy = 1f;
-    public Rigidbody2D MyBody;
-    public PlayerAnimations MyAnimator;
-    public ExplodeAnimator MyExplosionAnimator;
-    public GameObject MyUIPrefab;
-    public PlayerAI MyAI;
+    [Header("Player references")]
+    [SerializeField]
+    private Rigidbody2D myBody;
+    [SerializeField]
+    private CheckerScript checkLeft;
+    [SerializeField]
+    private CheckerScript checkRight;
+    [SerializeField]
+    private CheckerScript checkUp;
+    [SerializeField]
+    private CheckerScript checkDown;
 
-    public float MySpeed = 1;
+    [HideInInspector]
+    public Vector2 CurrentMovement = Vector2.zero;
+    [HideInInspector]
+    public int StepsCounter { get { return stepsCounter; } }
 
-    public CheckerScript CheckLeft;
-    public CheckerScript CheckRight;
-    public CheckerScript CheckUp;
-    public CheckerScript CheckDown;
+    private IPlayerAI myAI;
+    private PlayerController playerController;
+    private Vector2 nextTarget;
+
+    private float mySpeed;
 
     private bool movementInputsBlocked = false;
-    private Vector2 nextTarget;
-    private Vector2 movement = Vector2.zero;
-
     private bool canGoLeft;
     private bool canGoRight;
     private bool canGoUp;
     private bool canGoDown;
     private bool canStart = false;
-    private bool isDead = false;
-    private bool hasWon = false;
 
     private PlayerUI myUI;
     private int stepsCounter = 0;
 
-    void Start()
+    public void Initialize(PlayerController controller, IPlayerAI aiscript, float delay, float speed)
     {
-        canStart = false;
-        movementInputsBlocked = false;
-        Invoke("InitializeUIControl", DelayStartBy - 1);
-        Invoke("Initialize", DelayStartBy);
+        playerController = controller;
+        myAI = aiscript;
+        mySpeed = speed;
+        Invoke("InitializeDelayed", delay);
     }
 
-    private void InitializeUIControl()
-    {
-        var uiObject = (Instantiate(MyUIPrefab, Vector2.zero, new Quaternion())) as GameObject;
-        myUI = uiObject.GetComponent<PlayerUI>();
-        myUI.Initialize(MyAI.MyName, 0, MyAnimator.GetMySprite, NextPlayerNumber);
-    }
-
-    private void Initialize()
+    private void InitializeDelayed()
     {
         canStart = true;
         UpdateCheckerStates();
@@ -57,47 +54,43 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         if (!canStart) return;
-        if (isDead) return;
+        if (playerController.IsDead) return;
 
-        if (!movementInputsBlocked && !hasWon)
+        if (!movementInputsBlocked && !playerController.HasFinished)
         {
             try
             {
-                var selectedDirection = MyAI.RequestMove(GetPossibleDirections());
+                var selectedDirection = myAI.RequestMove(GetPossibleDirections());
                 if (!VerifySelection(selectedDirection))
                 {
                     KillPlayer(selectedDirection);
                     return;
                 }
 
-                IncreaseSteps();
-                if (selectedDirection == Direction.Down)
+                stepsCounter++;
+                if (selectedDirection == DirectionType.Down)
                 {
-                    Debug.Log("Tried to move Down");
-                    nextTarget = new Vector2(MyBody.position.x, MyBody.position.y - 1);
+                    nextTarget = new Vector2(myBody.position.x, myBody.position.y - 1);
                     movementInputsBlocked = true;
-                    movement = new Vector2(0, -1);
+                    CurrentMovement = new Vector2(0, -1);
                 }
-                if (selectedDirection == Direction.Up)
+                if (selectedDirection == DirectionType.Up)
                 {
-                    Debug.Log("Tried to move Up");
-                    nextTarget = new Vector2(MyBody.position.x, MyBody.position.y + 1);
+                    nextTarget = new Vector2(myBody.position.x, myBody.position.y + 1);
                     movementInputsBlocked = true;
-                    movement = new Vector2(0, 1);
+                    CurrentMovement = new Vector2(0, 1);
                 }
-                if (selectedDirection == Direction.Left)
+                if (selectedDirection == DirectionType.Left)
                 {
-                    Debug.Log("Tried to move Left");
-                    nextTarget = new Vector2(MyBody.position.x - 1, MyBody.position.y);
+                    nextTarget = new Vector2(myBody.position.x - 1, myBody.position.y);
                     movementInputsBlocked = true;
-                    movement = new Vector2(-1, 0);
+                    CurrentMovement = new Vector2(-1, 0);
                 }
-                if (selectedDirection == Direction.Right)
+                if (selectedDirection == DirectionType.Right)
                 {
-                    Debug.Log("Tried to move Right");
-                    nextTarget = new Vector2(MyBody.position.x + 1, MyBody.position.y);
+                    nextTarget = new Vector2(myBody.position.x + 1, myBody.position.y);
                     movementInputsBlocked = true;
-                    movement = new Vector2(1, 0);
+                    CurrentMovement = new Vector2(1, 0);
                 }
             }
             catch
@@ -106,28 +99,26 @@ public class Movement : MonoBehaviour
                 return;
             }
         }
-
-        MyAnimator.UpdateAnimation(movement);
     }
 
     private void FixedUpdate()
     {
         if (!canStart) return;
-        if (isDead) return;
+        if (playerController.IsDead) return;
 
-        if ((Vector2)MyBody.transform.position == nextTarget)
+        if ((Vector2)myBody.transform.position == nextTarget)
         {
-            if (movement != Vector2.zero)
+            if (CurrentMovement != Vector2.zero)
                 UpdateCheckerStates();
             movementInputsBlocked = false;
-            movement = Vector2.zero;
+            CurrentMovement = Vector2.zero;
         }
 
         //It's time to move
         if (movementInputsBlocked)
         {
-            var move = Vector2.MoveTowards(MyBody.position, nextTarget, MySpeed * Time.deltaTime);
-            MyBody.transform.position = move;
+            var move = Vector2.MoveTowards(myBody.position, nextTarget, mySpeed * Time.deltaTime);
+            myBody.transform.position = move;
         }
     }
 
@@ -135,81 +126,65 @@ public class Movement : MonoBehaviour
     {
         if (!canStart) return;
 
-        hasWon = true;
+        var myLayer = gameObject.layer;
+        var coliderLayer = collision.gameObject.layer;
+        var ignore = Physics2D.GetIgnoreLayerCollision(myLayer, coliderLayer);
+        if (ignore) return;
+
+        playerController.TriggerWin();
         myUI.OnFinalResults(1);
     }
 
     private void UpdateCheckerStates()
     {
-        canGoLeft = !CheckLeft.IsTouchingWall;
-        canGoRight = !CheckRight.IsTouchingWall;
-        canGoUp = !CheckUp.IsTouchingWall;
-        canGoDown = !CheckDown.IsTouchingWall;
+        canGoLeft = !checkLeft.IsTouchingWall;
+        canGoRight = !checkRight.IsTouchingWall;
+        canGoUp = !checkUp.IsTouchingWall;
+        canGoDown = !checkDown.IsTouchingWall;
     }
 
-    private Direction[] GetPossibleDirections()
+    private DirectionType[] GetPossibleDirections()
     {
-        var directions = new List<Direction>();
-        if (canGoDown) directions.Add(Direction.Down);
-        if (canGoUp) directions.Add(Direction.Up);
-        if (canGoRight) directions.Add(Direction.Right);
-        if (canGoLeft) directions.Add(Direction.Left);
+        var directions = new List<DirectionType>();
+        if (canGoDown) directions.Add(DirectionType.Down);
+        if (canGoUp) directions.Add(DirectionType.Up);
+        if (canGoRight) directions.Add(DirectionType.Right);
+        if (canGoLeft) directions.Add(DirectionType.Left);
 
         return directions.ToArray();
     }
 
-    private bool VerifySelection(Direction selection)
+    private bool VerifySelection(DirectionType selection)
     {
-        if (selection == Direction.Left && canGoLeft) return true;
-        if (selection == Direction.Right && canGoRight) return true;
-        if (selection == Direction.Up && canGoUp) return true;
-        if (selection == Direction.Down && canGoDown) return true;
+        if (selection == DirectionType.Left && canGoLeft) return true;
+        if (selection == DirectionType.Right && canGoRight) return true;
+        if (selection == DirectionType.Up && canGoUp) return true;
+        if (selection == DirectionType.Down && canGoDown) return true;
 
         return false;
     }
 
     private void KillPlayer(bool isException)
     {
-        isDead = true;
-        MyExplosionAnimator.TriggerExplosion();
-
-        if (isException)
-            myUI.OnError(ErrorType.Bug);
-
-        Invoke("UpdateUIIcon", 0.5f);
+        playerController.KillPlayer(isException ? ErrorType.Bug : ErrorType.None);
     }
 
-    private void UpdateUIIcon()
+    private void KillPlayer(DirectionType direction)
     {
-        myUI.UpdateIcon(MyAnimator.GetMySprite);
-    }
-
-    private void KillPlayer(Direction direction)
-    {
-        KillPlayer(false);
-
         switch (direction)
         {
-            case Direction.Down:
-                myUI.OnError(ErrorType.Down);
+            case DirectionType.Down:
+                playerController.KillPlayer(ErrorType.Down);
                 break;
-            case Direction.Left:
-                myUI.OnError(ErrorType.Left);
+            case DirectionType.Left:
+                playerController.KillPlayer(ErrorType.Left);
                 break;
-            case Direction.Right:
-                myUI.OnError(ErrorType.Right);
+            case DirectionType.Right:
+                playerController.KillPlayer(ErrorType.Right);
                 break;
-            case Direction.Up:
-                myUI.OnError(ErrorType.Up);
+            case DirectionType.Up:
+                playerController.KillPlayer(ErrorType.Up);
                 break;
         }
     }
-
-    private void IncreaseSteps()
-    {
-        stepsCounter++;
-        myUI.UpdateSteps(stepsCounter);
-    }
-
-    private int NextPlayerNumber => GameObject.FindGameObjectsWithTag("Player").Length;
 }

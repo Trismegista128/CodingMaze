@@ -3,9 +3,11 @@ using Assets.Scripts;
 
 public class CheckerScript : MonoBehaviour
 {
-    public CheckerType MyType;
+    [SerializeField]
+    private CheckerType myType;
+
+    [HideInInspector]
     public bool IsTouchingWall;
-    // Start is called before the first frame update
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
