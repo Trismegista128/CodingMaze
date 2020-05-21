@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Scripts;
+using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
@@ -49,9 +51,9 @@ public class PlayerController : MonoBehaviour
         imDead = false;
         iWon = false;
 
-        Invoke(nameof(InitializeUIControl), DelayMovementForSeconds-1);
-
-        var asset = Resources.Load<Object>(player.ScriptName) as GameObject;
+        Invoke(nameof(InitializeUIControl), DelayMovementForSeconds - 1);
+        var resources = Resources.LoadAll<GameObject>("PlayerScripts");
+        var asset = resources.First(x => x.name == player.ScriptName);
         var script = asset.GetComponent<IPlayerAI>();
 
         playerMovementController.Initialize(this, script, DelayMovementForSeconds, player.Speed);
@@ -85,11 +87,7 @@ public class PlayerController : MonoBehaviour
         this.error = error;
         Invoke(nameof(UpdateUIImage), 0.5f);
         playerAnimationController.TriggerExplosion();
-    }
-
-    public void TriggerDeath()
-    {
-
+        myUI.OnError(error);
     }
 
     public void TriggerWin()
@@ -101,5 +99,10 @@ public class PlayerController : MonoBehaviour
     {
         if(myUI != null)
             myUI.UpdateIcon(playerAnimationController.GetMySprite);
+    }
+
+    public void UpdateUIPosition(int place, int positionOnUI)
+    {
+        myUI.OnFinalResults(place, positionOnUI);
     }
 }

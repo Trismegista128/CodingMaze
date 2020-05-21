@@ -9,7 +9,7 @@ public class LevelController : MonoBehaviour
     public int LevelNumber;
 
     [HideInInspector]
-    public bool HaveAllFinished => playersOnLevel.All(x => x.Value.HasFinished);
+    public bool HaveAllFinished => playersOnLevel.All(x => x.Value.HasFinished || x.Value.IsDead);
 
     [SerializeField]
     private Transform Spawner;
@@ -64,45 +64,84 @@ public class LevelController : MonoBehaviour
 
     public Dictionary<int, PlayerStats> GetLevelStats()
     {
-        var listOfAllPlayersStats = new Dictionary<int, LevelStats>();
+        var listOfAll = new Dictionary<int, LevelStats>();
 
         //populate list
         foreach(var player in playersOnLevel)
         {
             var playerStat = player.Value.GatherStats();
-            listOfAllPlayersStats.Add(player.Key, playerStat);
+            listOfAll.Add(player.Key, playerStat);
         }
 
-        //order by place
-        listOfAllPlayersStats.OrderBy(x => x.Value.StepsDone);
+        var successful = listOfAll.Where(x => x.Value.HasFinished);
+        var failures = listOfAll.Where(x => x.Value.HasFinished == false);
 
-        //update players placement
-        for(int i = 0; i < listOfAllPlayersStats.Count ; i++)
+        var ordSuccess = successful.OrderBy(x => x.Value.StepsDone);
+        var ordFailure = failures.OrderByDescending(x => x.Value.StepsDone);
+
+        var distSuccessSteps = ordSuccess.Select(x => x.Value.StepsDone).Distinct().ToList();
+        var distfailureSteps = ordFailure.Select(x => x.Value.StepsDone).Distinct().ToList();
+
+        var lastPlacement = 0;
+        for(var i = 0; i < distSuccessSteps.Count(); i++)
         {
-            listOfAllPlayersStats[i].Placement = i + 1;
+            var value = distSuccessSteps[i];
+            var playersWithScore = successful.Where(x => x.Value.StepsDone == value);
+            foreach(var player in playersWithScore)
+            {
+                lastPlacement = i + 1;
+                player.Value.Placement = lastPlacement;
+            }
         }
 
-        //sort again by player ID
-        listOfAllPlayersStats.OrderBy(x => x.Key);
+        for (var i = 0; i < distfailureSteps.Count(); i++)
+        {
+            var value = distfailureSteps[i];
+            var playersWithScore = failures.Where(x => x.Value.StepsDone == value);
+            foreach (var player in playersWithScore)
+            {
+                player.Value.Placement = lastPlacement + i + 1;
+            }
+        }
 
         var levelStats = new Dictionary<int, PlayerStats>();
-
-        //generate collection of players and theirs level statistics
-        foreach(var player in listOfAllPlayersStats)
+        foreach(var stat in listOfAll)
         {
             var playerStat = new PlayerStats();
-            playerStat.Levels.Add(LevelNumber, player.Value);
-            levelStats.Add(player.Key, playerStat);
+            playerStat.Levels.Add(LevelNumber, stat.Value);
+            levelStats.Add(stat.Key, playerStat);
         }
 
         return levelStats;
     }
 
-    public void TriggerDeaths()
+    public void UpdateUIScores(Dictionary<int, PlayerStats> scores)
+    {
+        var positions = new Dictionary<int, int>();
+
+        foreach(var score in scores)
+        {
+            var playerId = score.Key;
+            var playerPosition = score.Value.Levels[LevelNumber].Placement;
+
+            positions.Add(playerId, playerPosition);
+        }
+
+        var ordered = positions.OrderBy(x => x.Value).ToList();
+
+        for(var i = 0; i < ordered.Count; i++)
+        {
+            playersOnLevel[ordered[i].Key].UpdateUIPosition(ordered[i].Value, i + 1);
+        }
+    }
+
+    public void EmergencyKill()
     {
         foreach(var player in playersOnLevel)
         {
-            player.Value.TriggerDeath();
+            if (player.Value.HasFinished || player.Value.IsDead) continue;
+
+            player.Value.KillPlayer(ErrorType.Looped);
         }
     }
 }

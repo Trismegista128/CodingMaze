@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Scripts;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
@@ -20,10 +21,22 @@ public class GameController : MonoBehaviour
 
     private Dictionary<int, PlayerStats> Statistics;
     private LevelController levelController;
+    private bool isGamePlay = false;
+    private bool isLevelInitialized = false;
+
+    [HideInInspector]
+    public bool IsReadyToContinue = false;
+
+    [HideInInspector]
+    public bool IsGamePlay { get { return isGamePlay; } }
+
     private void Start()
     {
-        Statistics = new Dictionary<int, PlayerStats>();
+        isGamePlay = false;
+        isLevelInitialized = true;
+        IsReadyToContinue = true;
 
+        Statistics = new Dictionary<int, PlayerStats>();
         for(var i = 0; i < PlayersInGame.Length; i++)
         {
             var stat = new PlayerStats();
@@ -32,15 +45,34 @@ public class GameController : MonoBehaviour
 
         UpdatePlayersData();
 
-        levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
-        levelController.InitializePlayers(PlayersInGame, DelayBetweenPlayers);
-
         DontDestroyOnLoad(this.gameObject);
     }
 
-    private void Update()
+    private void OnLevelWasLoaded(int level)
     {
-        if (levelController.HaveAllFinished)
+        isLevelInitialized = false;
+        IsReadyToContinue = false;
+
+        if(level > 0)
+        {
+            isGamePlay = true;
+            levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
+            levelController.InitializePlayers(PlayersInGame, DelayBetweenPlayers);
+            StartCoroutine(WaitForAllPlayersToSpawn());
+        }
+        else
+        {
+            isGamePlay = false;
+            isLevelInitialized = true;
+            IsReadyToContinue = true;
+        }
+    }
+
+    void Update()
+    {
+        if (!isGamePlay) return;
+
+        if (isLevelInitialized && levelController.HaveAllFinished && !IsReadyToContinue)
         {
             FinalizeLevel();
         }
@@ -78,6 +110,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitForAllPlayersToSpawn()
+    {
+        yield return new WaitForSeconds(PlayersInGame.Count() * DelayBetweenPlayers + 0.5f);
+        isLevelInitialized = true;
+
+        yield return null;
+    }
+
     private void UpdateStats()
     {
         var currentLevelStats = levelController.GetLevelStats();
@@ -90,17 +130,29 @@ public class GameController : MonoBehaviour
             var thisPlayerLevelStats = currentLevelStats[id].Levels.First();
             stat.Levels.Add(thisPlayerLevelStats.Key, thisPlayerLevelStats.Value);
         }
+
+        levelController.UpdateUIScores(currentLevelStats);
     }
 
     public void FinalizeLevel()
     {
         UpdateStats();
-        LoadNextLevel();
+        IsReadyToContinue = true;
     }
 
     public void LoadNextLevel()
     {
         var currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
+        SceneManager.LoadScene(currentScene.buildIndex + 1);
+    }
+
+    public void StartTheGame()
+    {
+        LoadNextLevel();
+    }
+
+    public void EmergencyKillAllPlayers()
+    {
+        levelController.EmergencyKill();
     }
 }

@@ -3831,74 +3831,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1929789722
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1929789724}
-  - component: {fileID: 1929789723}
-  m_Layer: 0
-  m_Name: GameController
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1929789723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1929789722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d84bd1c815196e40b99263be1c2231d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DelayBetweenPlayers: 1
-  PlayersSpeed: 1
-  PlayersInGame:
-  - Id: 0
-    Speed: 0
-    Name: POL
-    CharacterType: 3
-    CharacterImage: {fileID: -332329350007998501, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
-      type: 3}
-    ScriptName: Palu
-  - Id: 0
-    Speed: 0
-    Name: Ana
-    CharacterType: 1
-    CharacterImage: {fileID: 4093874439507865758, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
-      type: 3}
-    ScriptName: Palu
-  CharacterPrefabs:
-  - {fileID: 2990696424882088268, guid: 5985e04e68b79704399f448a1a42719a, type: 3}
-  - {fileID: 2459785694610240684, guid: 875adb211804c6c449b9600b1b8e243f, type: 3}
-  - {fileID: 6623592062342020554, guid: 30b0a464f597f8949957333a4c7100db, type: 3}
-  - {fileID: 1020531148008111708, guid: 42524dcc9aa4bf844a7e34408835528e, type: 3}
-  - {fileID: 2573584602322206749, guid: eaaa02c3e839a2d4383d18717f737951, type: 3}
-  - {fileID: 6843923708050870708, guid: e9a3a0abecb33d84798d0d1a8b9f1122, type: 3}
-  - {fileID: 2454190410215765109, guid: 6d186eb5b96e30549a22395c438fc67c, type: 3}
---- !u!4 &1929789724
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1929789722}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.204136, y: 6.4989176, z: -30.69629}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2100675191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3952,9 +3884,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 123389973
-  m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingLayerID: -500020935
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: -3547463755423716203, guid: 7a1bb8b8dc48a8e42b77a5e1bd870ff7,
     type: 3}
   m_Color: {r: 0.764151, g: 0.1549929, b: 0.17836492, a: 0.68235296}
@@ -3979,5 +3911,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

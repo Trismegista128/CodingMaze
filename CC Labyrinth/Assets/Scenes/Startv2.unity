@@ -269,6 +269,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1521350940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1521350942}
+  - component: {fileID: 1521350941}
+  m_Layer: 0
+  m_Name: NavigationController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1521350941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521350940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1aeeaf6c8d3ef348a7fcdc0c0482bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameController: {fileID: 1929789723}
+--- !u!4 &1521350942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521350940}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.485235, y: 2.3062668, z: -31.596972}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1626972337
 GameObject:
   m_ObjectHideFlags: 0
@@ -4384,18 +4428,25 @@ MonoBehaviour:
   PlayersInGame:
   - Id: 0
     Speed: 0
-    Name: POL
+    Name: Bug
     CharacterType: 3
     CharacterImage: {fileID: -332329350007998501, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
       type: 3}
-    ScriptName: Palu
+    ScriptName: ThrowExceptionScript
   - Id: 0
     Speed: 0
-    Name: Ana
+    Name: YOU
     CharacterType: 1
     CharacterImage: {fileID: 4093874439507865758, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
       type: 3}
-    ScriptName: Palu
+    ScriptName: TakeFirstOption
+  - Id: 0
+    Speed: 0
+    Name: MOV
+    CharacterType: 5
+    CharacterImage: {fileID: 247141583273151806, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: NeverGoBack
   CharacterPrefabs:
   - {fileID: 2990696424882088268, guid: 5985e04e68b79704399f448a1a42719a, type: 3}
   - {fileID: 2459785694610240684, guid: 875adb211804c6c449b9600b1b8e243f, type: 3}
@@ -4404,6 +4455,7 @@ MonoBehaviour:
   - {fileID: 2573584602322206749, guid: eaaa02c3e839a2d4383d18717f737951, type: 3}
   - {fileID: 6843923708050870708, guid: e9a3a0abecb33d84798d0d1a8b9f1122, type: 3}
   - {fileID: 2454190410215765109, guid: 6d186eb5b96e30549a22395c438fc67c, type: 3}
+  IsReadyToContinue: 0
 --- !u!4 &1929789724
 Transform:
   m_ObjectHideFlags: 0

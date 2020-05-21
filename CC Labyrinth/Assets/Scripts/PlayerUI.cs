@@ -48,9 +48,9 @@ public class PlayerUI : MonoBehaviour
         myIcon.sprite = sprite;
     }
 
-    public void OnFinalResults(int myPlace)
+    public void OnFinalResults(int myPlace, int positionOnUI)
     {
-        myPosition.position = new Vector2(CalculatePostionXBaseOnNumber(myPlace), yPosition);
+        myPosition.position = new Vector2(CalculatePostionXBaseOnNumber(positionOnUI), yPosition);
 
         if (myPlace == 1) myMedals[0].enabled = true;
         if (myPlace == 2) myMedals[1].enabled = true;
