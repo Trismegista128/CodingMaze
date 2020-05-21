@@ -7,10 +7,10 @@ namespace Assets.Scripts
     {
         public PlayerStats()
         {
-            Levels = new List<LevelStats>();
+            Levels = new Dictionary<int, LevelStats>();
         }
 
-        public List<LevelStats> Levels;
-        public int TotalSteps => Levels.Sum(x => x.StepsDone);
+        public Dictionary<int, LevelStats> Levels;
+        public int TotalSteps => Levels.Sum(x => x.Value.StepsDone);
     }
 }

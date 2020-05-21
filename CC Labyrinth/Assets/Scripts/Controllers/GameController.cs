@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using Assets.Scripts;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -32,6 +34,16 @@ public class GameController : MonoBehaviour
 
         levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
         levelController.InitializePlayers(PlayersInGame, DelayBetweenPlayers);
+
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Update()
+    {
+        if (levelController.HaveAllFinished)
+        {
+            FinalizeLevel();
+        }
     }
 
     private void UpdatePlayersData()
@@ -68,6 +80,27 @@ public class GameController : MonoBehaviour
 
     private void UpdateStats()
     {
-        var smth = levelController.GatherLevelStats();
+        var currentLevelStats = levelController.GetLevelStats();
+
+        foreach(var player in Statistics)
+        {
+            var id = player.Key;
+            var stat = player.Value;
+
+            var thisPlayerLevelStats = currentLevelStats[id].Levels.First();
+            stat.Levels.Add(thisPlayerLevelStats.Key, thisPlayerLevelStats.Value);
+        }
+    }
+
+    public void FinalizeLevel()
+    {
+        UpdateStats();
+        LoadNextLevel();
+    }
+
+    public void LoadNextLevel()
+    {
+        var currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.buildIndex);
     }
 }

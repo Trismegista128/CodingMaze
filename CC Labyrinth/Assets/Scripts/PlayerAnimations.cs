@@ -33,5 +33,9 @@ public class PlayerAnimations : MonoBehaviour
         myExplosionAnimator.TriggerExplosion();
     }
 
+    public void SetSortingOrder(int position)
+    {
+        myCharacterRenderer.sortingOrder = 100 - position;
+    }
     public Sprite GetMySprite => myCharacterRenderer.sprite;
 }

@@ -2,9 +2,15 @@
 using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class LevelController : MonoBehaviour
 {
+    public int LevelNumber;
+
+    [HideInInspector]
+    public bool HaveAllFinished => playersOnLevel.All(x => x.Value.HasFinished);
+
     [SerializeField]
     private Transform Spawner;
 
@@ -22,7 +28,7 @@ public class LevelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void InitializePlayers(PlayerSetup[] players, float delay)
@@ -56,14 +62,37 @@ public class LevelController : MonoBehaviour
         yield return null;
     }
 
-    public Dictionary<int, LevelStats> GatherLevelStats()
+    public Dictionary<int, PlayerStats> GetLevelStats()
     {
-        var levelStats = new Dictionary<int, LevelStats>();
+        var listOfAllPlayersStats = new Dictionary<int, LevelStats>();
 
+        //populate list
         foreach(var player in playersOnLevel)
         {
-            var playerStats = player.Value.GatherStats();
-            levelStats.Add(player.Key, playerStats);
+            var playerStat = player.Value.GatherStats();
+            listOfAllPlayersStats.Add(player.Key, playerStat);
+        }
+
+        //order by place
+        listOfAllPlayersStats.OrderBy(x => x.Value.StepsDone);
+
+        //update players placement
+        for(int i = 0; i < listOfAllPlayersStats.Count ; i++)
+        {
+            listOfAllPlayersStats[i].Placement = i + 1;
+        }
+
+        //sort again by player ID
+        listOfAllPlayersStats.OrderBy(x => x.Key);
+
+        var levelStats = new Dictionary<int, PlayerStats>();
+
+        //generate collection of players and theirs level statistics
+        foreach(var player in listOfAllPlayersStats)
+        {
+            var playerStat = new PlayerStats();
+            playerStat.Levels.Add(LevelNumber, player.Value);
+            levelStats.Add(player.Key, playerStat);
         }
 
         return levelStats;

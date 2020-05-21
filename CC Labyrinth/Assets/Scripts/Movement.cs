@@ -34,7 +34,6 @@ public class Movement : MonoBehaviour
     private bool canGoDown;
     private bool canStart = false;
 
-    private PlayerUI myUI;
     private int stepsCounter = 0;
 
     public void Initialize(PlayerController controller, IPlayerAI aiscript, float delay, float speed)
@@ -132,7 +131,6 @@ public class Movement : MonoBehaviour
         if (ignore) return;
 
         playerController.TriggerWin();
-        myUI.OnFinalResults(1);
     }
 
     private void UpdateCheckerStates()

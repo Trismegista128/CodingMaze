@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject playerUIPrefab;
-
     private PlayerUI myUI;
 
     [HideInInspector]
@@ -22,7 +21,6 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool HasFinished { get { return iWon; } }
 
-    private CharacterType myType;
     private string myName;
     private int mySteps;
     private int myId;
@@ -30,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private bool imDead;
     private bool iWon;
     private bool isInitialized = false;
+    private ErrorType error;
 
     private void Update()
     {
@@ -45,7 +44,6 @@ public class PlayerController : MonoBehaviour
     {
         myId = player.Id;
         myName = player.Name;
-        myType = player.CharacterType;
 
         mySteps = 0;
         imDead = false;
@@ -57,6 +55,7 @@ public class PlayerController : MonoBehaviour
         var script = asset.GetComponent<IPlayerAI>();
 
         playerMovementController.Initialize(this, script, DelayMovementForSeconds, player.Speed);
+        playerAnimationController.SetSortingOrder(player.Id);
 
         isInitialized = true;
     }
@@ -73,16 +72,17 @@ public class PlayerController : MonoBehaviour
         var stats = new LevelStats();
 
         //take infor from somewhere;
-        stats.Placement = 1;
-        stats.HasFinished = false;
-        stats.StepsDone = 10;
-        stats.ErrorType = ErrorType.Bug;
+        stats.HasFinished = iWon;
+        stats.StepsDone = playerMovementController.StepsCounter;
+        stats.ErrorType = error;
 
         return stats;
     }
 
     public void KillPlayer(ErrorType error)
     {
+        imDead = true;
+        this.error = error;
         Invoke(nameof(UpdateUIImage), 0.5f);
         playerAnimationController.TriggerExplosion();
     }
