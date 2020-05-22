@@ -44,6 +44,11 @@ public class Movement : MonoBehaviour
         Invoke("InitializeDelayed", delay);
     }
 
+    public void ResetSteps()
+    {
+        stepsCounter = 0;
+    }
+
     private void InitializeDelayed()
     {
         canStart = true;

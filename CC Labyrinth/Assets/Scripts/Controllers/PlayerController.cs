@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
         this.error = error;
         Invoke(nameof(UpdateUIImage), 0.5f);
         playerAnimationController.TriggerExplosion();
+        playerMovementController.ResetSteps();
         myUI.OnError(error);
     }
 

@@ -74,14 +74,20 @@ public class LevelController : MonoBehaviour
         }
 
         var successful = listOfAll.Where(x => x.Value.HasFinished);
-        var failures = listOfAll.Where(x => x.Value.HasFinished == false);
+        var loopFailures = listOfAll.Where(x => x.Value.ErrorType == ErrorType.Looped);
+        var bugFailures = listOfAll.Where(x => x.Value.ErrorType == ErrorType.Bug);
+        var restFailures = listOfAll.Where(x => 
+            x.Value.HasFinished == false && 
+            x.Value.ErrorType != ErrorType.Bug && 
+            x.Value.ErrorType != ErrorType.Looped);
 
         var ordSuccess = successful.OrderBy(x => x.Value.StepsDone);
-        var ordFailure = failures.OrderByDescending(x => x.Value.StepsDone);
+        var ordFailure = restFailures.OrderByDescending(x => x.Value.StepsDone);
 
         var distSuccessSteps = ordSuccess.Select(x => x.Value.StepsDone).Distinct().ToList();
         var distfailureSteps = ordFailure.Select(x => x.Value.StepsDone).Distinct().ToList();
 
+        //First place those who finished level
         var lastPlacement = 0;
         for(var i = 0; i < distSuccessSteps.Count(); i++)
         {
@@ -94,14 +100,32 @@ public class LevelController : MonoBehaviour
             }
         }
 
+        //Then place those who had to be killed as on the same place
+        if (loopFailures.Any())
+        {
+            lastPlacement++;
+            foreach (var loopBug in loopFailures)
+            {
+                loopBug.Value.Placement = lastPlacement;
+            }
+        }
+
+        //Then those who entered the wall
         for (var i = 0; i < distfailureSteps.Count(); i++)
         {
             var value = distfailureSteps[i];
-            var playersWithScore = failures.Where(x => x.Value.StepsDone == value);
+            var playersWithScore = restFailures.Where(x => x.Value.StepsDone == value);
+            lastPlacement++;
             foreach (var player in playersWithScore)
             {
-                player.Value.Placement = lastPlacement + i + 1;
+                player.Value.Placement = lastPlacement;
             }
+        }
+
+        //Last are those who provided buggy script.
+        foreach (var bug in bugFailures)
+        {
+            bug.Value.Placement = lastPlacement + 1;
         }
 
         var levelStats = new Dictionary<int, PlayerStats>();

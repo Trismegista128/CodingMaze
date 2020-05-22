@@ -25,7 +25,9 @@ public class SummaryController : MonoBehaviour
             playerDataCollection.Add(playerId, new KeyValuePair<Transform, SummaryPlayerStats>(playerTransform, playerStats));
         }
 
-        var orderedStats = stats.OrderByDescending(x => x.Value.Levels.Sum(y => y.Value.HasFinished ? 1 : 0)).ThenBy(x => x.Value.TotalSteps).ToList();
+        var orderedStats = stats.OrderByDescending(x => x.Value.Levels.Sum(y => y.Value.FinishValue))
+                                .ThenByDescending(x=>x.Value.Levels.Sum(y=>y.Value.ErrorValue))
+                                .ThenBy(x => x.Value.TotalSteps).ToList();
 
         for (int col = 0; col < orderedStats.Count(); col++)
         {
