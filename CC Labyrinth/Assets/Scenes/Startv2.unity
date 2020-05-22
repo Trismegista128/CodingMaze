@@ -4430,7 +4430,7 @@ MonoBehaviour:
     Speed: 0
     Name: Bug
     CharacterType: 3
-    CharacterImage: {fileID: -332329350007998501, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+    CharacterImage: {fileID: 188150859637260872, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
       type: 3}
     ScriptName: ThrowExceptionScript
   - Id: 0

@@ -24,15 +24,9 @@ public class SummaryLevelStats : MonoBehaviour
     [SerializeField]
     private Color RedColor;
 
-    void Start()
+    public void Initialize(int row, LevelStats stats)
     {
-        gameObject.SetActive(false);
-    }
-
-    public void InitializeStats(int row, int col, LevelStats stats)
-    {
-        gameObject.SetActive(true);
-        tr.position = new Vector2(CalculateXPos(col), CalculateYPos(row));
+        tr.position = new Vector2(4.125f, CalculateYPos(row));
 
         var color = stats.HasFinished ? SelectColor(stats) : RedColor;
         if (stats.HasFinished)
@@ -53,17 +47,12 @@ public class SummaryLevelStats : MonoBehaviour
 
     private float CalculateYPos(int row)
     {
-        if (row == 1) return 9.125f;
-        if (row == 2) return 7.125f;
-        if (row == 3) return 5.125f;
-        if (row == 4) return 3.125f;
+        if (row == 0) return 9.125f;
+        if (row == 1) return 7.125f;
+        if (row == 2) return 5.125f;
+        if (row == 3) return 3.125f;
 
         return 1.125f;
-    }
-
-    private float CalculateXPos(int col)
-    {
-        return 4.125f;
     }
 
     private Color SelectColor(LevelStats stats)

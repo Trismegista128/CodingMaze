@@ -30,18 +30,21 @@ public class GameController : MonoBehaviour
     [HideInInspector]
     public bool IsGamePlay { get { return isGamePlay; } }
 
+    private int totalLevels;
+    private int currentSceneIndex;
+
+    private bool isSummaryLevel => currentSceneIndex == totalLevels-1;
+    private bool isStartLevel => currentSceneIndex == 0;
+
     private void Start()
     {
         isGamePlay = false;
         isLevelInitialized = true;
         IsReadyToContinue = true;
+        totalLevels = SceneManager.sceneCountInBuildSettings;
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        Statistics = new Dictionary<int, PlayerStats>();
-        for(var i = 0; i < PlayersInGame.Length; i++)
-        {
-            var stat = new PlayerStats();
-            Statistics.Add(i, stat);
-        }
+        ClearStatistics();
 
         UpdatePlayersData();
 
@@ -52,20 +55,31 @@ public class GameController : MonoBehaviour
     {
         isLevelInitialized = false;
         IsReadyToContinue = false;
+        currentSceneIndex = level;
 
-        if(level > 0)
+        if (level > 0 && !isSummaryLevel)
         {
             isGamePlay = true;
             levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
             levelController.InitializePlayers(PlayersInGame, DelayBetweenPlayers);
             StartCoroutine(WaitForAllPlayersToSpawn());
+            return;
         }
-        else
+        
+        isGamePlay = false;
+        isLevelInitialized = true;
+        IsReadyToContinue = true;
+
+        if (isStartLevel)
         {
-            isGamePlay = false;
-            isLevelInitialized = true;
-            IsReadyToContinue = true;
+            ClearStatistics();
         }
+        else if (isSummaryLevel)
+        {
+            var summaryController = GameObject.FindGameObjectWithTag("SummaryController").GetComponent<SummaryController>();
+            summaryController.InitializeSummary(Statistics, PlayersInGame);
+        }
+        
     }
 
     void Update()
@@ -75,6 +89,16 @@ public class GameController : MonoBehaviour
         if (isLevelInitialized && levelController.HaveAllFinished && !IsReadyToContinue)
         {
             FinalizeLevel();
+        }
+    }
+
+    private void ClearStatistics()
+    {
+        Statistics = new Dictionary<int, PlayerStats>();
+        for (var i = 0; i < PlayersInGame.Length; i++)
+        {
+            var stat = new PlayerStats();
+            Statistics.Add(i, stat);
         }
     }
 
@@ -142,8 +166,10 @@ public class GameController : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        var currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex + 1);
+        if (isSummaryLevel)
+            SceneManager.LoadScene(0);
+        else
+            SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
     public void StartTheGame()
