@@ -4435,9 +4435,9 @@ MonoBehaviour:
     ScriptName: ThrowExceptionScript
   - Id: 0
     Speed: 0
-    Name: YOU
-    CharacterType: 1
-    CharacterImage: {fileID: 4093874439507865758, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+    Name: 1st
+    CharacterType: 6
+    CharacterImage: {fileID: -7684110499066237130, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
       type: 3}
     ScriptName: TakeFirstOption
   - Id: 0
@@ -4447,6 +4447,13 @@ MonoBehaviour:
     CharacterImage: {fileID: 247141583273151806, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
       type: 3}
     ScriptName: NeverGoBack
+  - Id: 0
+    Speed: 0
+    Name: Ami
+    CharacterType: 1
+    CharacterImage: {fileID: 4093874439507865758, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Amelka
   CharacterPrefabs:
   - {fileID: 2990696424882088268, guid: 5985e04e68b79704399f448a1a42719a, type: 3}
   - {fileID: 2459785694610240684, guid: 875adb211804c6c449b9600b1b8e243f, type: 3}
