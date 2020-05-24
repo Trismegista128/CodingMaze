@@ -129,6 +129,8 @@ public class GameController : MonoBehaviour
                 return CharacterPrefabs[5];
             case CharacterType.VanDame:
                 return CharacterPrefabs[6];
+            case CharacterType.Palu:
+                return CharacterPrefabs[7];
             default:
                 return null;
         }

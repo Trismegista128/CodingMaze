@@ -9,6 +9,7 @@
         Vader,
         Doctor,
         Scout,
-        Renegate
+        Renegate,
+        Palu
     }
 }

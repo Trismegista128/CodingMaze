@@ -4443,8 +4443,8 @@ MonoBehaviour:
   - Id: 0
     Speed: 0
     Name: MOV
-    CharacterType: 5
-    CharacterImage: {fileID: 247141583273151806, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+    CharacterType: 7
+    CharacterImage: {fileID: -2582504296357612105, guid: 87d8d98012f439f4e83077387860f8a1,
       type: 3}
     ScriptName: NeverGoBack
   - Id: 0
@@ -4454,6 +4454,13 @@ MonoBehaviour:
     CharacterImage: {fileID: 4093874439507865758, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
       type: 3}
     ScriptName: Amelka
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
   CharacterPrefabs:
   - {fileID: 2990696424882088268, guid: 5985e04e68b79704399f448a1a42719a, type: 3}
   - {fileID: 2459785694610240684, guid: 875adb211804c6c449b9600b1b8e243f, type: 3}
@@ -4462,6 +4469,7 @@ MonoBehaviour:
   - {fileID: 2573584602322206749, guid: eaaa02c3e839a2d4383d18717f737951, type: 3}
   - {fileID: 6843923708050870708, guid: e9a3a0abecb33d84798d0d1a8b9f1122, type: 3}
   - {fileID: 2454190410215765109, guid: 6d186eb5b96e30549a22395c438fc67c, type: 3}
+  - {fileID: 7932617941085107905, guid: 5f877fc950685104ba75e56949a601e0, type: 3}
   IsReadyToContinue: 0
 --- !u!4 &1929789724
 Transform:
