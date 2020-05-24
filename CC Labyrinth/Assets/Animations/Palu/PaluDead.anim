@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PaluUp
+  m_Name: PaluDead
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,17 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 3880169722048614986, guid: 87d8d98012f439f4e83077387860f8a1,
-        type: 3}
-    - time: 0.016666668
-      value: {fileID: 1890666761771762203, guid: 87d8d98012f439f4e83077387860f8a1,
-        type: 3}
-    - time: 0.033333335
-      value: {fileID: 919483589865379813, guid: 87d8d98012f439f4e83077387860f8a1,
-        type: 3}
-    - time: 0.05
-      value: {fileID: 1890666761771762203, guid: 87d8d98012f439f4e83077387860f8a1,
-        type: 3}
+      value: {fileID: 21300000, guid: f3ab09af71bca5a4aafe9f6a53363dbf, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,16 +40,13 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 3880169722048614986, guid: 87d8d98012f439f4e83077387860f8a1, type: 3}
-    - {fileID: 1890666761771762203, guid: 87d8d98012f439f4e83077387860f8a1, type: 3}
-    - {fileID: 919483589865379813, guid: 87d8d98012f439f4e83077387860f8a1, type: 3}
-    - {fileID: 1890666761771762203, guid: 87d8d98012f439f4e83077387860f8a1, type: 3}
+    - {fileID: 21300000, guid: f3ab09af71bca5a4aafe9f6a53363dbf, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.06666667
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
