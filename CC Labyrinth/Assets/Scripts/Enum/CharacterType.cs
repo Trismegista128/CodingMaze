@@ -4,13 +4,13 @@
     public enum CharacterType
     {
         VanDame,
-        Anna,
-        Tapani,
+        Scientist,
+        Teacher,
         Vader,
         Doctor,
         Scout,
         Renegate,
-        Palu,
+        EvilDoc,
         Elvis,
         Joker
     }
