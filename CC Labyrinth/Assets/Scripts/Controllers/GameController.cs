@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
         else if (isSummaryLevel)
         {
             var summaryController = GameObject.FindGameObjectWithTag("SummaryController").GetComponent<SummaryController>();
-            summaryController.InitializeSummary(Statistics, PlayersInGame);
+            summaryController.InitializeSummary(Statistics, PlayersInGame, 1);
         }
         
     }

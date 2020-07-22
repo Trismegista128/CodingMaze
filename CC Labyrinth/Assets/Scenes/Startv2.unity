@@ -4461,6 +4461,76 @@ MonoBehaviour:
     CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
       type: 3}
     ScriptName: Right
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
+  - Id: 0
+    Speed: 0
+    Name: RGH
+    CharacterType: 2
+    CharacterImage: {fileID: -3745621719119518123, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: Right
   CharacterPrefabs:
   - {fileID: 2990696424882088268, guid: 5985e04e68b79704399f448a1a42719a, type: 3}
   - {fileID: 2459785694610240684, guid: 875adb211804c6c449b9600b1b8e243f, type: 3}
