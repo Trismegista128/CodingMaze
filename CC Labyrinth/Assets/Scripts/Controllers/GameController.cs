@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     private float DelayBetweenPlayers = 1f;
     [SerializeField]
     private float PlayersSpeed = 1f;
+    private float initialSpeed = 1f;
+    private float previousSpeed = 1f;
 
     [SerializeField]
     private PlayerSetup[] PlayersInGame;
@@ -60,6 +62,7 @@ public class GameController : MonoBehaviour
         if (level > 0 && !isSummaryLevel)
         {
             isGamePlay = true;
+            PlayersSpeed = initialSpeed;
             levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
             levelController.InitializePlayers(PlayersInGame, DelayBetweenPlayers);
             StartCoroutine(WaitForAllPlayersToSpawn());
@@ -85,6 +88,12 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (!isGamePlay) return;
+
+        if(previousSpeed != PlayersSpeed)
+        {
+            previousSpeed = PlayersSpeed;
+            levelController.ChangePlayersSpeed(previousSpeed);
+        }
 
         if (isLevelInitialized && levelController.HaveAllFinished && !IsReadyToContinue)
         {
@@ -115,7 +124,7 @@ public class GameController : MonoBehaviour
     {
         switch (charType)
         {
-            case CharacterType.Anna:
+            case CharacterType.Scientist:
                 return CharacterPrefabs[0];
             case CharacterType.Doctor:
                 return CharacterPrefabs[1];
@@ -123,13 +132,13 @@ public class GameController : MonoBehaviour
                 return CharacterPrefabs[2];
             case CharacterType.Scout:
                 return CharacterPrefabs[3];
-            case CharacterType.Tapani:
+            case CharacterType.Teacher:
                 return CharacterPrefabs[4];
             case CharacterType.Vader:
                 return CharacterPrefabs[5];
             case CharacterType.VanDame:
                 return CharacterPrefabs[6];
-            case CharacterType.Palu:
+            case CharacterType.EvilDoc:
                 return CharacterPrefabs[7];
             case CharacterType.Elvis:
                 return CharacterPrefabs[8];

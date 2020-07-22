@@ -62,6 +62,11 @@ public class PlayerController : MonoBehaviour
         isInitialized = true;
     }
 
+    public void ChangePlayerSpeed(float speed)
+    {
+        playerMovementController.ChangePlayerSpeed(speed);
+    }
+
     private void InitializeUIControl()
     {
         var uiObject = (Instantiate(playerUIPrefab, Vector2.zero, new Quaternion())) as GameObject;

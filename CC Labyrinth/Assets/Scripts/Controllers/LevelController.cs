@@ -39,6 +39,14 @@ public class LevelController : MonoBehaviour
         StartCoroutine(InitializePlayers(delay));
     }
 
+    public void ChangePlayersSpeed(float speed)
+    {
+        foreach(var player in playersOnLevel)
+        {
+            player.Value.ChangePlayerSpeed(speed);
+        }
+    }
+
     private IEnumerator InitializePlayers(float delay)
     {
         foreach(var player in playersData)

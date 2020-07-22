@@ -49,6 +49,11 @@ public class Movement : MonoBehaviour
         stepsCounter = 0;
     }
 
+    public void ChangePlayerSpeed(float speed)
+    {
+        mySpeed = speed;
+    }
+
     private void InitializeDelayed()
     {
         canStart = true;
