@@ -7,5 +7,17 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JokerOverride
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: d09ffbb2ad730944092789dec39aebad, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 0f068c36b750db54d8a5fd30fa1bfb63, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0598ebe292f07a74499463642b8a1efa, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a0187240b5756e141a892a04ed49aa4f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 28a9a5812a95c844d9523554b603f4ef, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ada898c8528a747469d3739919b41551, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cf982ea7eb80fec4fb0db0f96f1dac69, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 89421143800ba8d42a239b012536bb7e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 072fd76f175936c4793c6c54988efb4c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3fa69ccb06b56c642bc0388709ac7508, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c96b061a55c419b45ac670276582c6e5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 856e46a892fc4f745960730838758266, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ee8f8be7e1e93cf47a7e76c53787fb2f, type: 2}

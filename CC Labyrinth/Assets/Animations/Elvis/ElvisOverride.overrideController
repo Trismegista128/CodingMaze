@@ -6,6 +6,18 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Elvis Override Controller
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Name: ElvisOverride
+  m_Controller: {fileID: 9100000, guid: d09ffbb2ad730944092789dec39aebad, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 0f068c36b750db54d8a5fd30fa1bfb63, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8a8c9df8733de3e4dbc0254a4173319e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a0187240b5756e141a892a04ed49aa4f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c1fb54ad891af2e4791934f657f242cb, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ada898c8528a747469d3739919b41551, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5bcaaec49e936af44b060f7d5bf66275, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 89421143800ba8d42a239b012536bb7e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 985b737f0c42ce74dadb85b32964aee4, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3fa69ccb06b56c642bc0388709ac7508, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f73db6ed33ab39c499cdcf12b8bb9422, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 856e46a892fc4f745960730838758266, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e770aeb85a41a9845a0858b4e1ece5fc, type: 2}
