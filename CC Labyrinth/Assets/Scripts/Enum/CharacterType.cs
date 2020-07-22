@@ -10,6 +10,8 @@
         Doctor,
         Scout,
         Renegate,
-        Palu
+        Palu,
+        Elvis,
+        Joker
     }
 }
