@@ -4424,29 +4424,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DelayBetweenPlayers: 1
-  PlayersSpeed: 1
+  PlayersSpeed: 3
   PlayersInGame:
   - Id: 0
     Speed: 0
-    Name: JOK
+    Name: POL
+    CharacterType: 7
+    CharacterImage: {fileID: -7090636167261200184, guid: 4fc59beed269b8d409c86501a54aa6ed,
+      type: 3}
+    ScriptName: NeverGoBack
+  - Id: 0
+    Speed: 0
+    Name: IHM
     CharacterType: 9
     CharacterImage: {fileID: 7925773400204758853, guid: 4fc59beed269b8d409c86501a54aa6ed,
       type: 3}
-    ScriptName: Right
+    ScriptName: IHateMazes
   - Id: 0
     Speed: 0
-    Name: ELV
+    Name: 123
+    CharacterType: 3
+    CharacterImage: {fileID: 5000826891159382528, guid: 4fc59beed269b8d409c86501a54aa6ed,
+      type: 3}
+    ScriptName: OneTwoThree
+  - Id: 0
+    Speed: 0
+    Name: AAA
+    CharacterType: 2
+    CharacterImage: {fileID: 4339773239811623241, guid: 4fc59beed269b8d409c86501a54aa6ed,
+      type: 3}
+    ScriptName: AAA
+  - Id: 0
+    Speed: 0
+    Name: BIB
     CharacterType: 8
     CharacterImage: {fileID: -4099069409424564221, guid: 4fc59beed269b8d409c86501a54aa6ed,
       type: 3}
-    ScriptName: Right
+    ScriptName: BIB
   - Id: 0
     Speed: 0
-    Name: PAL
-    CharacterType: 7
-    CharacterImage: {fileID: -2582504296357612105, guid: 87d8d98012f439f4e83077387860f8a1,
+    Name: AKA
+    CharacterType: 5
+    CharacterImage: {fileID: 8948579661057125629, guid: 4fc59beed269b8d409c86501a54aa6ed,
       type: 3}
-    ScriptName: NeverGoBack
+    ScriptName: Amelka
+  - Id: 0
+    Speed: 0
+    Name: OMR
+    CharacterType: 6
+    CharacterImage: {fileID: 2542680161404328585, guid: 4fc59beed269b8d409c86501a54aa6ed,
+      type: 3}
+    ScriptName: Right
   CharacterPrefabs:
   - {fileID: 2990696424882088268, guid: 5985e04e68b79704399f448a1a42719a, type: 3}
   - {fileID: 2459785694610240684, guid: 875adb211804c6c449b9600b1b8e243f, type: 3}
