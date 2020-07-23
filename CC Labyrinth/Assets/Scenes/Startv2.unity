@@ -4424,22 +4424,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DelayBetweenPlayers: 1
-  PlayersSpeed: 1
+  PlayersSpeed: 40
   PlayersInGame:
-  - Id: 0
-    Speed: 0
-    Name: POL
-    CharacterType: 7
-    CharacterImage: {fileID: -7090636167261200184, guid: 4fc59beed269b8d409c86501a54aa6ed,
-      type: 3}
-    ScriptName: NeverGoBack
   - Id: 0
     Speed: 0
     Name: AAA
     CharacterType: 2
-    CharacterImage: {fileID: 4093874439507865758, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+    CharacterImage: {fileID: 4339773239811623241, guid: 4fc59beed269b8d409c86501a54aa6ed,
       type: 3}
     ScriptName: AAA
+  - Id: 0
+    Speed: 0
+    Name: 123
+    CharacterType: 3
+    CharacterImage: {fileID: 188150859637260872, guid: cfa16af3b8b2e5b4cb53ba3090a62227,
+      type: 3}
+    ScriptName: OneTwoThree
   - Id: 0
     Speed: 0
     Name: IHM
@@ -4447,6 +4447,20 @@ MonoBehaviour:
     CharacterImage: {fileID: 7925773400204758853, guid: 4fc59beed269b8d409c86501a54aa6ed,
       type: 3}
     ScriptName: IHateMazes
+  - Id: 0
+    Speed: 0
+    Name: BIB
+    CharacterType: 8
+    CharacterImage: {fileID: -4099069409424564221, guid: 4fc59beed269b8d409c86501a54aa6ed,
+      type: 3}
+    ScriptName: BIB
+  - Id: 0
+    Speed: 0
+    Name: NGB
+    CharacterType: 7
+    CharacterImage: {fileID: -7090636167261200184, guid: 4fc59beed269b8d409c86501a54aa6ed,
+      type: 3}
+    ScriptName: NeverGoBack
   - Id: 0
     Speed: 0
     Name: ROX
