@@ -16,14 +16,87 @@ public class OneTwoThree : MonoBehaviour, IPlayerAI
     //NOTE: In a case two teams will chose the same one we will have a chat on MS_TEAMS (or somewhere) to find the agreement.
     private CharacterType TeamCharacter = CharacterType.Vader;
     private DirectionType previousMove = DirectionType.Up;
+    private bool isFirstRun = true;
 
     public DirectionType RequestMove(DirectionType[] possibleDirections)
     {
+        if (isFirstRun)
+        {
+            var firstDirection = GetFirstDirection(possibleDirections);
+            isFirstRun = false;
+            return firstDirection;
+        }
+
         var shiftedMove = CorrectiveMove(previousMove);
-        var nextMove = ChooseNextMove(possibleDirections, shiftedMove);
+        var preferedMove = ChooseNextMove(possibleDirections, shiftedMove);
+        var nextMove = CorrectMove(possibleDirections, preferedMove);
 
         previousMove = nextMove;
         return nextMove;
+    }
+
+    private DirectionType GetFirstDirection(DirectionType[] possibleDirections)
+    {
+        var prioritizedDirectionsList = new List<DirectionType> { DirectionType.Right, DirectionType.Up, DirectionType.Left, DirectionType.Down };
+        List<DirectionType> possibleDirectionsList = new List<DirectionType>();
+        foreach (var item in possibleDirections)
+        {
+            possibleDirectionsList.Add(item);
+        }
+
+        foreach (var item in prioritizedDirectionsList)
+        {
+            if (possibleDirectionsList.Contains(item)) return item;
+        }
+
+        return possibleDirectionsList[new System.Random().Next(1, possibleDirectionsList.Count)];
+    }
+
+    private DirectionType CorrectMove(DirectionType[] possibleDirections, DirectionType preferedMove)
+    {
+        List<DirectionType> possibleDirectionsList = new List<DirectionType>();
+        List<DirectionType> prioritizedDirectionsList = new List<DirectionType>();
+
+        foreach (var item in possibleDirections)
+        {
+            possibleDirectionsList.Add(item);
+        }
+
+        if (preferedMove == DirectionType.Down)
+        {
+            prioritizedDirectionsList.Add(DirectionType.Down);
+            prioritizedDirectionsList.Add(DirectionType.Right);
+            prioritizedDirectionsList.Add(DirectionType.Up);
+            prioritizedDirectionsList.Add(DirectionType.Left);
+        }
+        else if (preferedMove == DirectionType.Right)
+        {
+            prioritizedDirectionsList.Add(DirectionType.Right);
+            prioritizedDirectionsList.Add(DirectionType.Up);
+            prioritizedDirectionsList.Add(DirectionType.Left);
+            prioritizedDirectionsList.Add(DirectionType.Down);
+        }
+        else if (preferedMove == DirectionType.Up)
+        {
+            prioritizedDirectionsList.Add(DirectionType.Up);
+            prioritizedDirectionsList.Add(DirectionType.Left);
+            prioritizedDirectionsList.Add(DirectionType.Down);
+            prioritizedDirectionsList.Add(DirectionType.Right);
+        }
+        else if (preferedMove == DirectionType.Left)
+        {
+            prioritizedDirectionsList.Add(DirectionType.Left);
+            prioritizedDirectionsList.Add(DirectionType.Down);
+            prioritizedDirectionsList.Add(DirectionType.Right);
+            prioritizedDirectionsList.Add(DirectionType.Up);
+        }
+
+        foreach (var item in prioritizedDirectionsList)
+        {
+            if (possibleDirectionsList.Contains(item)) return item;
+        }
+
+        return possibleDirectionsList[new System.Random().Next(1, possibleDirectionsList.Count)];
     }
 
     private int CorrectiveMove(DirectionType previousMove)

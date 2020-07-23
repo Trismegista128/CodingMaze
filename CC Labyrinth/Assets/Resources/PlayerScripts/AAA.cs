@@ -23,7 +23,7 @@ public class AAA : MonoBehaviour, IPlayerAI
     public DirectionType RequestMove(DirectionType[] possibleDirections)
     {
         //[Replace the throw exception thingy by your algorithm]
-        
+
         // First move
         if (!firstMovePlayed)
         {
@@ -87,7 +87,7 @@ public class AAA : MonoBehaviour, IPlayerAI
         }
 
         // Corner where we cant turn right
-        if (possibleDirections.Length == 2 && !possibleDirections.Contains(TurnRight(previousMovement))&& !possibleDirections.Contains(previousMovement))
+        if (possibleDirections.Length == 2 && !possibleDirections.Contains(TurnRight(previousMovement)) && !possibleDirections.Contains(previousMovement))
         {
             var newMove = TurnLeft(previousMovement);
             nbRightTurnsInARow = 0;
@@ -147,8 +147,8 @@ public class AAA : MonoBehaviour, IPlayerAI
         switch (previousDirection)
         {
             case DirectionType.Down: return DirectionType.Right;
-            case DirectionType.Left: return DirectionType.Up;
-            case DirectionType.Right: return DirectionType.Down;
+            case DirectionType.Left: return DirectionType.Down;
+            case DirectionType.Right: return DirectionType.Up;
             case DirectionType.Up: return DirectionType.Left;
             default: return DirectionType.Left;
         }
@@ -159,9 +159,9 @@ public class AAA : MonoBehaviour, IPlayerAI
         switch (previousDirection)
         {
             case DirectionType.Down: return DirectionType.Left;
-            case DirectionType.Left: return DirectionType.Down;
-            case DirectionType.Right: return DirectionType.Up;
-            case DirectionType.Up: return DirectionType.Right; 
+            case DirectionType.Left: return DirectionType.Up;
+            case DirectionType.Right: return DirectionType.Down;
+            case DirectionType.Up: return DirectionType.Right;
             default: return DirectionType.Right;
         }
 
