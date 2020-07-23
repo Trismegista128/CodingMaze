@@ -4,7 +4,6 @@ using Assets.Scripts;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField]
     private float yPosition = 12.625f;
     [SerializeField]
     private Transform myPosition;
@@ -20,8 +19,10 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     private SpriteRenderer[] myErrorIcons;
 
-    public void Initialize(string name, int steps, Sprite characterIcon, int playerNumber)
+    public void Initialize(string name, int steps, Sprite characterIcon, int playerNumber, float yCustomPosition)
     {
+        yPosition = yCustomPosition;
+
         myName.text = name;
         mySteps.text = CreateStepsString(steps);
         myIcon.sprite = characterIcon;

@@ -8,6 +8,9 @@ public class LevelController : MonoBehaviour
 {
     public int LevelNumber;
 
+    [SerializeField]
+    private float uiYPosition = 12.625f;
+
     [HideInInspector]
     public bool HaveAllFinished => playersOnLevel.All(x => x.Value.HasFinished || x.Value.IsDead);
 
@@ -63,7 +66,7 @@ public class LevelController : MonoBehaviour
         var playerPrefab = gameController.GetCharacterPrefab(player.CharacterType);
         var playerObject = Instantiate(playerPrefab, Spawner.position, new Quaternion()) as GameObject;
         var playerController = playerObject.GetComponent<PlayerController>();
-        playerController.InitializePlayer(player, Spawner.position);
+        playerController.InitializePlayer(player, Spawner.position, uiYPosition);
 
         playersOnLevel.Add(player.Id, playerController);
 

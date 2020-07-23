@@ -47,12 +47,14 @@ public class SummaryLevelStats : MonoBehaviour
 
     private float CalculateYPos(int row)
     {
-        if (row == 0) return 9.125f;
-        if (row == 1) return 7.125f;
-        if (row == 2) return 5.125f;
-        if (row == 3) return 3.125f;
-
-        return 1.125f;
+        return 9.125f - row * 2;
+        //if (row == 0) return 9.125f;
+        //if (row == 1) return 7.125f;
+        //if (row == 2) return 5.125f;
+        //if (row == 3) return 3.125f;
+        //if (row == 4) return 1.125f;
+        //if (row == 5) return 
+        //return 1.125f;
     }
 
     private Color SelectColor(LevelStats stats)

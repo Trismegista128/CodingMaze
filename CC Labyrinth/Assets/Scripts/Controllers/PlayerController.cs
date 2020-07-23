@@ -2,6 +2,7 @@
 using Assets.Scripts;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
             myUI.UpdateSteps(playerMovementController.StepsCounter);
     }
 
-    public void InitializePlayer(PlayerSetup player, Vector2 startingPostion)
+    public void InitializePlayer(PlayerSetup player, Vector2 startingPostion, float yCustomPosition)
     {
         myId = player.Id;
         myName = player.Name;
@@ -51,7 +52,8 @@ public class PlayerController : MonoBehaviour
         imDead = false;
         iWon = false;
 
-        Invoke(nameof(InitializeUIControl), DelayMovementForSeconds - 1);
+        //Invoke(nameof(InitializeUIControl), DelayMovementForSeconds - 1);
+        StartCoroutine(InitializeUIControl(yCustomPosition));
         var resources = Resources.LoadAll<GameObject>("PlayerScripts");
         var asset = resources.First(x => x.name == player.ScriptName);
         var script = asset.GetComponent<IPlayerAI>();
@@ -67,11 +69,13 @@ public class PlayerController : MonoBehaviour
         playerMovementController.ChangePlayerSpeed(speed);
     }
 
-    private void InitializeUIControl()
+    private IEnumerator InitializeUIControl(float yCustomPosition)
     {
+        yield return new WaitForSeconds(DelayMovementForSeconds - 1);
+
         var uiObject = (Instantiate(playerUIPrefab, Vector2.zero, new Quaternion())) as GameObject;
         myUI = uiObject.GetComponent<PlayerUI>();
-        myUI.Initialize(myName, mySteps, playerAnimationController.GetMySprite, myId + 1);
+        myUI.Initialize(myName, mySteps, playerAnimationController.GetMySprite, myId + 1, yCustomPosition);
     }
 
     public LevelStats GatherStats()
