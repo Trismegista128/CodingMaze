@@ -9,7 +9,7 @@ public class SummaryController : MonoBehaviour
     private Dictionary<int, KeyValuePair<Transform, SummaryPlayerStats>> playerDataCollection;
     private List<KeyValuePair<int, PlayerStats>> orderedStats;
 
-    private int PlayerStatsPerPage = 7;
+    private int PlayerStatsPerPage = 8;
     private int currentPage = 0;
 
     private void Update()

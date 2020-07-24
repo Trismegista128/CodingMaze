@@ -4424,7 +4424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DelayBetweenPlayers: 1
-  PlayersSpeed: 40
+  PlayersSpeed: 1
   PlayersInGame:
   - Id: 0
     Speed: 0
@@ -4442,11 +4442,11 @@ MonoBehaviour:
     ScriptName: OneTwoThree
   - Id: 0
     Speed: 0
-    Name: IHM
+    Name: IAM
     CharacterType: 9
     CharacterImage: {fileID: 7925773400204758853, guid: 4fc59beed269b8d409c86501a54aa6ed,
       type: 3}
-    ScriptName: IHateMazes
+    ScriptName: IaMAZEdMyself
   - Id: 0
     Speed: 0
     Name: BIB
@@ -4456,18 +4456,32 @@ MonoBehaviour:
     ScriptName: BIB
   - Id: 0
     Speed: 0
-    Name: NGB
-    CharacterType: 7
-    CharacterImage: {fileID: -7090636167261200184, guid: 4fc59beed269b8d409c86501a54aa6ed,
+    Name: SAM
+    CharacterType: 0
+    CharacterImage: {fileID: -3376614264583215025, guid: 4fc59beed269b8d409c86501a54aa6ed,
       type: 3}
-    ScriptName: NeverGoBack
+    ScriptName: Sam
   - Id: 0
     Speed: 0
     Name: ROX
+    CharacterType: 7
+    CharacterImage: {fileID: -7090636167261200184, guid: 4fc59beed269b8d409c86501a54aa6ed,
+      type: 3}
+    ScriptName: StackRox
+  - Id: 0
+    Speed: 0
+    Name: EXP
     CharacterType: 5
     CharacterImage: {fileID: 8948579661057125629, guid: 4fc59beed269b8d409c86501a54aa6ed,
       type: 3}
-    ScriptName: StackRox
+    ScriptName: TheExplorer
+  - Id: 0
+    Speed: 0
+    Name: IHM
+    CharacterType: 6
+    CharacterImage: {fileID: 2542680161404328585, guid: 4fc59beed269b8d409c86501a54aa6ed,
+      type: 3}
+    ScriptName: IHateMazes
   CharacterPrefabs:
   - {fileID: 2990696424882088268, guid: 5985e04e68b79704399f448a1a42719a, type: 3}
   - {fileID: 2459785694610240684, guid: 875adb211804c6c449b9600b1b8e243f, type: 3}
